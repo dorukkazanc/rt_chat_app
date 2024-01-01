@@ -24,22 +24,5 @@ int connectTcpServer(SOCKADDR_IN *server, SOCKET s) {
 }
 
 int initialize() {
-    WSADATA wsa;
-    SOCKET sock;
-    struct sockaddr_in server;
-    server.sin_family = AF_INET;
-    server.sin_addr.s_addr = inet_addr("127.0.0.1");
-    server.sin_port = htons(80);
 
-    printf("\nInitialising Winsock...");
-    if (WSAStartup(MAKEWORD(2,2), &wsa) != 0) {
-        printf("Failed. Error Code : %d", WSAGetLastError());
-        return 1;
-    }
-
-    printf("Initialised.\n");
-    socketCreate(&sock, WSAGetLastError());
-    if (connectTcpServer(&server, sock) != 0) {
-        return 1;
-    }
 }
