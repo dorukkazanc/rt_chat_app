@@ -1,35 +1,15 @@
-/*
-	Initialise Winsock
-*/
+//
+// Created by pc on 01/01/2024.
+//
 
-#include<stdio.h>
-#include<winsock2.h>
+#include <winsock.h>
 
-void socketCreate(SOCKET sock, const int lastError) {
-    if((sock = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
-    {
-        printf("Socket cannot be created : %d", lastError);
-    }else {
-        printf("Socket created\n");
+#ifndef RT_CHAT_APP_TCP_SERVER_H
+#define RT_CHAT_APP_TCP_SERVER_H
 
-    }
-}
+void socketCreate(SOCKET *sock, const int lastError);
+int connectTcpServer(SOCKADDR_IN *server, SOCKET s);
+int initialize();
 
-int initialize()
-{
-    WSADATA wsa;
-    SOCKET sock;
 
-    printf("\nInitialising Winsock...");
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-    {
-        printf("Failed. Error Code : %d",WSAGetLastError());
-        return 1;
-    }
-
-    printf("Initialised.\n");
-    socketCreate(sock, WSAGetLastError());
-
-    return 0;
-}
-
+#endif //RT_CHAT_APP_TCP_SERVER_H
